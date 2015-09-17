@@ -1,0 +1,122 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@12f60533";
+	jenginegenerator6060830225489488864L = "edu.ucla.belief.inference.JoinTreeSettings@b38d0ce";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@471051e6";
+	node_size = (130 55);
+}
+
+node Forecast
+{
+	states = ("WillRain" "WillNotRain" );
+	position = (111 -50);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "Forecast";
+	excludepolicy = "include whole CPT";
+}
+node Umbrella
+{
+	states = ("Yes" "No" );
+	position = (33 -137);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "Umbrella";
+	excludepolicy = "include whole CPT";
+}
+node Drenched
+{
+	states = ("Yes" "No" );
+	position = (114 -233);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable4";
+	label = "Drenched";
+	excludepolicy = "include whole CPT";
+}
+node Rain
+{
+	states = ("Yes" "No" );
+	position = (202 -140);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "Rain";
+	excludepolicy = "include whole CPT";
+}
+node Cold
+{
+	states = ("Yes" "No" );
+	position = (112 -338);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable5";
+	label = "Cold";
+	excludepolicy = "include whole CPT";
+}
+node Sprinkler
+{
+	states = ("On" "Off" );
+	position = (366 -137);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable3";
+	label = "Sprinkler";
+	excludepolicy = "include whole CPT";
+}
+node WetGrass
+{
+	states = ("Yes" "No" );
+	position = (298 -229);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable6";
+	label = "WetGrass";
+	excludepolicy = "include whole CPT";
+}
+potential ( Forecast | )
+{
+	data = (	0.3	0.7	);
+}
+potential ( Umbrella | Forecast )
+{
+	data = ((	0.75	0.25	)
+		(	0.05	0.95	));
+}
+potential ( Drenched | Umbrella Rain )
+{
+	data = (((	0.05	0.95	)
+		(	0.0	1.0	))
+		((	0.8	0.2	)
+		(	0.0	1.0	)));
+}
+potential ( Rain | Forecast )
+{
+	data = ((	0.85	0.15	)
+		(	0.05	0.95	));
+}
+potential ( Cold | Drenched )
+{
+	data = ((	0.9	0.1	)
+		(	0.5	0.5	));
+}
+potential ( Sprinkler | )
+{
+	data = (	0.25	0.75	);
+}
+potential ( WetGrass | Rain Sprinkler )
+{
+	data = (((	1.0	0.0	)
+		(	0.95	0.05	))
+		((	1.0	0.0	)
+		(	0.01	0.99	)));
+}
